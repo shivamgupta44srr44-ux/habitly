@@ -25,5 +25,4 @@ A responsive, static habit tracker layout built as Week 1 of the CodGen Frontend
 - Building a reusable card design
 - Making a layout responsive with a mobile-first approach
 
-## Next
-Week 2 adds interactivity with JavaScript.
+
