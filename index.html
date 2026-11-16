@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Habitly | Build habits that stick</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0B1F3A;
+      --navy-soft: #1B3358;
+      --teal: #14B8A6;
+      --teal-dark: #0F9488;
+      --teal-tint: #E6F7F5;
+      --bg: #F8FAFC;
+      --card: #FFFFFF;
+      --muted: #64748B;
+      --line: #E2E8F0;
+      --radius: 12px;
+      --shadow: 0 1px 3px rgba(11, 31, 58, 0.06), 0 4px 12px rgba(11, 31, 58, 0.05);
+      --shadow-hover: 0 12px 28px rgba(11, 31, 58, 0.12);
+      --s1: 8px;
+      --s2: 16px;
+      --s3: 24px;
+      --s4: 32px;
+      --s5: 40px;
+      --s6: 48px;
+      --font: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--navy);
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 var(--s2);
+    }
+
+    /* ---------- Header ---------- */
+    .site-header {
+      background: var(--navy);
+      color: #fff;
+      border-bottom: 4px solid var(--teal);
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--s2) 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .brand-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: var(--teal);
+      display: grid;
+      place-items: center;
+      font-size: 22px;
+    }
+    .today {
+      font-size: 14px;
+      font-weight: 500;
+      color: #CBD5E1;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 6px 16px;
+      border-radius: 999px;
+    }
+    .hero {
+      padding: var(--s5) 0 var(--s6);
+      max-width: 640px;
+    }
+    .hero h1 {
+      font-size: 32px;
+      line-height: 1.2;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+    .hero p {
+      margin-top: 12px;
+      color: #CBD5E1;
+      font-size: 16px;
+    }
+
+    /* ---------- Main ---------- */
+    main {
+      flex: 1;
+      padding-bottom: var(--s6);
+    }
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: var(--s2);
+    }
+    .section-head h2 {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .section-head span {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: var(--s3);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--teal);
+    }
+
+    /* ---------- Summary ---------- */
+    .summary {
+      margin-top: calc(var(--s4) * -1);
+      position: relative;
+      margin-bottom: var(--s5);
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--s2);
+    }
+    .stat-label {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--muted);
+    }
+    .stat-value {
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin: 4px 0 var(--s2);
+    }
+    .stat-value small {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 0;
+    }
+    .stat-note { font-size: 13px; color: var(--muted); }
+
+    .progress {
+      height: 8px;
+      background: var(--teal-tint);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: var(--s1);
+    }
+    .progress-bar {
+      height: 100%;
+      width: 60%;
+      background: var(--teal);
+      border-radius: 999px;
+    }
+
+    .week-bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 6px;
+      height: 32px;
+      margin-bottom: var(--s1);
+    }
+    .week-bars i {
+      flex: 1;
+      background: var(--teal);
+      border-radius: 4px;
+    }
+    .week-bars i:nth-child(1) { height: 70%; }
+    .week-bars i:nth-child(2) { height: 100%; }
+    .week-bars i:nth-child(3) { height: 80%; }
+    .week-bars i:nth-child(4) { height: 100%; }
+    .week-bars i:nth-child(5) { height: 60%; }
+    .week-bars i:nth-child(6) { height: 40%; background: var(--line); }
+    .week-bars i:nth-child(7) { height: 40%; background: var(--line); }
+
+    /* ---------- Habit cards ---------- */
+    .habit-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: var(--s3);
+    }
+    .habit-card {
+      display: flex;
+      flex-direction: column;
+      gap: var(--s2);
+    }
+    .habit-top {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .habit-emoji {
+      width: 56px;
+      height: 56px;
+      border-radius: var(--radius);
+      background: var(--teal-tint);
+      display: grid;
+      place-items: center;
+      font-size: 28px;
+      flex-shrink: 0;
+    }
+    .habit-name { font-size: 18px; font-weight: 700; line-height: 1.3; }
+    .habit-meta { font-size: 13px; color: var(--muted); }
+
+    .streak {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+    .streak strong {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--teal-dark);
+      letter-spacing: -0.02em;
+    }
+    .streak span { font-size: 14px; color: var(--muted); font-weight: 500; }
+
+    .week-dots {
+      display: flex;
+      justify-content: space-between;
+      padding-top: var(--s2);
+      border-top: 1px dashed var(--line);
+    }
+    .week-dots li {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+    }
+    .week-dots li::before {
+      content: "";
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 2px solid var(--line);
+    }
+    .week-dots li.done::before {
+      background: var(--teal);
+      border-color: var(--teal);
+    }
+
+    .btn {
+      background: var(--teal);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 12px var(--s3);
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .btn:hover {
+      background: var(--teal-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(20, 184, 166, 0.35);
+    }
+    .btn:focus-visible { outline: 3px solid var(--navy); outline-offset: 2px; }
+
+    /* ---------- Footer ---------- */
+    .site-footer {
+      background: var(--navy);
+      color: #CBD5E1;
+      text-align: center;
+      font-size: 14px;
+      padding: var(--s3) var(--s2);
+    }
+
+    /* ---------- Tablet ---------- */
+    @media (min-width: 768px) {
+      .container { padding: 0 var(--s4); }
+      .hero h1 { font-size: 40px; }
+      .stats { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    /* ---------- Laptop ---------- */
+    @media (min-width: 1280px) {
+      .hero h1 { font-size: 44px; }
+      .habit-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <div class="nav">
+        <div class="brand">
+          <span class="brand-logo" aria-hidden="true">🌱</span>
+          <span>Habitly</span>
+        </div>
+        <p class="today">Monday, 16 November</p>
+      </div>
+      <div class="hero">
+        <h1>Small habits, done daily.</h1>
+        <p>3 of 5 habits are done today. Finish the rest to keep your streaks going.</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="summary" aria-label="Summary">
+      <div class="stats">
+        <article class="card">
+          <p class="stat-label">Done today</p>
+          <p class="stat-value">3<small> / 5</small></p>
+          <div class="progress"><div class="progress-bar"></div></div>
+          <p class="stat-note">2 habits left</p>
+        </article>
+        <article class="card">
+          <p class="stat-label">Best streak</p>
+          <p class="stat-value">12<small> days</small></p>
+          <p class="stat-note">Reading is your longest run</p>
+        </article>
+        <article class="card">
+          <p class="stat-label">This week</p>
+          <p class="stat-value">78<small>%</small></p>
+          <div class="week-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <p class="stat-note">Mon to Sun</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="habits" aria-labelledby="habits-title">
+      <div class="section-head">
+        <h2 id="habits-title">Today's habits</h2>
+        <span>5 habits</span>
+      </div>
+      <div class="habit-grid">
+
+        <article class="card habit-card">
+          <div class="habit-top">
+            <span class="habit-emoji" aria-hidden="true">💧</span>
+            <div>
+              <h3 class="habit-name">Drink water</h3>
+              <p class="habit-meta">8 glasses a day</p>
+            </div>
+          </div>
+          <p class="streak"><strong>7</strong><span>day streak</span></p>
+          <ul class="week-dots" aria-label="Last 7 days">
+            <li class="done">M</li><li class="done">T</li><li class="done">W</li><li class="done">T</li><li class="done">F</li><li class="done">S</li><li class="done">S</li>
+          </ul>
+          <button class="btn" type="button">Complete</button>
+        </article>
+
+        <article class="card habit-card">
+          <div class="habit-top">
+            <span class="habit-emoji" aria-hidden="true">📚</span>
+            <div>
+              <h3 class="habit-name">Read 20 pages</h3>
+              <p class="habit-meta">Before bed</p>
+            </div>
+          </div>
+          <p class="streak"><strong>12</strong><span>day streak</span></p>
+          <ul class="week-dots" aria-label="Last 7 days">
+            <li class="done">M</li><li class="done">T</li><li class="done">W</li><li class="done">T</li><li class="done">F</li><li class="done">S</li><li class="done">S</li>
+          </ul>
+          <button class="btn" type="button">Complete</button>
+        </article>
+
+        <article class="card habit-card">
+          <div class="habit-top">
+            <span class="habit-emoji" aria-hidden="true">🏃</span>
+            <div>
+              <h3 class="habit-name">Morning run</h3>
+              <p class="habit-meta">30 minutes</p>
+            </div>
+          </div>
+          <p class="streak"><strong>4</strong><span>day streak</span></p>
+          <ul class="week-dots" aria-label="Last 7 days">
+            <li>M</li><li>T</li><li>W</li><li class="done">T</li><li class="done">F</li><li class="done">S</li><li class="done">S</li>
+          </ul>
+          <button class="btn" type="button">Complete</button>
+        </article>
+
+        <article class="card habit-card">
+          <div class="habit-top">
+            <span class="habit-emoji" aria-hidden="true">🧘</span>
+            <div>
+              <h3 class="habit-name">Meditate</h3>
+              <p class="habit-meta">10 minutes</p>
+            </div>
+          </div>
+          <p class="streak"><strong>9</strong><span>day streak</span></p>
+          <ul class="week-dots" aria-label="Last 7 days">
+            <li class="done">M</li><li class="done">T</li><li class="done">W</li><li class="done">T</li><li class="done">F</li><li class="done">S</li><li class="done">S</li>
+          </ul>
+          <button class="btn" type="button">Complete</button>
+        </article>
+
+        <article class="card habit-card">
+          <div class="habit-top">
+            <span class="habit-emoji" aria-hidden="true">💻</span>
+            <div>
+              <h3 class="habit-name">Code for 1 hour</h3>
+              <p class="habit-meta">Side project time</p>
+            </div>
+          </div>
+          <p class="streak"><strong>21</strong><span>day streak</span></p>
+          <ul class="week-dots" aria-label="Last 7 days">
+            <li class="done">M</li><li class="done">T</li><li class="done">W</li><li class="done">T</li><li class="done">F</li><li class="done">S</li><li class="done">S</li>
+          </ul>
+          <button class="btn" type="button">Complete</button>
+        </article>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Built with the CodGen Frontend Internship | codgen.in</p>
+  </footer>
+
+</body>
+</html>
